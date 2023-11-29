@@ -31,10 +31,4 @@ public class Init {
         usersService.save(user);
         usersService.save(admin);
     }
-            /*
-            Создать юзера, роли
-            Сохранить роли
-            Добавить юзеру роли
-            Сохранить юзеров
-             */
 }

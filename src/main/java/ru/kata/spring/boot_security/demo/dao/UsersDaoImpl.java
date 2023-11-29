@@ -1,7 +1,6 @@
 package ru.kata.spring.boot_security.demo.dao;
 
 import org.springframework.stereotype.Repository;
-import ru.kata.spring.boot_security.demo.configs.EncoderConfig;
 import ru.kata.spring.boot_security.demo.entities.Role;
 import ru.kata.spring.boot_security.demo.entities.User;
 

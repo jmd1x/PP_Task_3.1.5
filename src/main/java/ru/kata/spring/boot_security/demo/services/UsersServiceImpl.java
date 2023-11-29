@@ -9,10 +9,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.kata.spring.boot_security.demo.dao.UsersDao;
-import ru.kata.spring.boot_security.demo.entities.Role;
 import ru.kata.spring.boot_security.demo.entities.User;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -36,6 +34,7 @@ public class UsersServiceImpl implements UsersService, UserDetailsService {
     public void save(User user) {
         usersDao.save(user);
     }
+
     @Transactional
     public void addUser(User user) {
         usersDao.addUser(user);
@@ -64,6 +63,7 @@ public class UsersServiceImpl implements UsersService, UserDetailsService {
             throw new UsernameNotFoundException("User doesn't exist!");
         }
     }
+
     public User findByUsername(String username) {
         return usersDao.findByUsername(username);
     }

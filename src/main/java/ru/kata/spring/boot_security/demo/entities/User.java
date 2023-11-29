@@ -30,7 +30,7 @@ public class User implements UserDetails {
             joinColumns = @JoinColumn(name = "users_id"),
             inverseJoinColumns = @JoinColumn(name = "roles_id"))
     @Fetch(FetchMode.JOIN)
-    private Set <Role> roles;
+    private Set<Role> roles;
 
     public Set<Role> getRoles() {
         return roles;

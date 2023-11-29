@@ -12,10 +12,12 @@ public interface UsersService extends UserDetailsService {
     public User show(int id);
 
     public void save(User user);
+
     public void addUser(User user);
 
     public void update(int id, User updatedUser);
 
     public void delete(int id);
-    public User findByUsername (String username);
+
+    public User findByUsername(String username);
 }
