@@ -1,9 +1,7 @@
 package ru.kata.spring.boot_security.demo.dao;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
-import ru.kata.spring.boot_security.demo.configs.EncoderConfig;
 import ru.kata.spring.boot_security.demo.entities.Role;
 import ru.kata.spring.boot_security.demo.entities.User;
 
@@ -48,13 +46,7 @@ public class UsersDaoImpl implements UsersDao {
 
     @Override
     public void update(int id, User updatedUser) {
-//        User user = findByUsername(updatedUser.getUsername());
-//        user.setId(updatedUser.getId());
-//        user.setName(updatedUser.getName());
-//        user.setSurname(updatedUser.getSurname());
-//        user.setAge(updatedUser.getAge());
-//        user.setPassword(bCryptPasswordEncoder.encode(updatedUser.getPassword()));
-//        user.setRoles(updatedUser.getRoles());
+        updatedUser.setPassword(bCryptPasswordEncoder.encode(updatedUser.getPassword()));
         entityManager.merge(updatedUser);
     }
 
