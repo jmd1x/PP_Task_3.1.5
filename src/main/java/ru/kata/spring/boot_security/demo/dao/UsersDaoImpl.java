@@ -9,6 +9,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 @Repository
 public class UsersDaoImpl implements UsersDao {
@@ -46,7 +47,9 @@ public class UsersDaoImpl implements UsersDao {
 
     @Override
     public void update(int id, User updatedUser) {
+        Set<Role> roles = show(id).getRoles();
         updatedUser.setPassword(bCryptPasswordEncoder.encode(updatedUser.getPassword()));
+        updatedUser.setRoles(roles);
         entityManager.merge(updatedUser);
     }
 

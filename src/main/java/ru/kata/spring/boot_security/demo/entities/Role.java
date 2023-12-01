@@ -3,7 +3,6 @@ package ru.kata.spring.boot_security.demo.entities;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
-import java.util.Set;
 
 @Entity
 @Table(name = "roles_data")
@@ -12,8 +11,6 @@ public class Role implements GrantedAuthority {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String role;
-    @ManyToMany(cascade = CascadeType.ALL)
-    private Set<User> users;
 
     public Role() {
     }
@@ -42,14 +39,6 @@ public class Role implements GrantedAuthority {
 
     public void setRole(String role) {
         this.role = role;
-    }
-
-    public Set<User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(Set<User> users) {
-        this.users = users;
     }
 
     @Override
