@@ -1,6 +1,9 @@
 package ru.kata.spring.boot_security.demo.dao;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
+import ru.kata.spring.boot_security.demo.configs.EncoderConfig;
 import ru.kata.spring.boot_security.demo.entities.Role;
 import ru.kata.spring.boot_security.demo.entities.User;
 
@@ -11,8 +14,14 @@ import java.util.List;
 
 @Repository
 public class UsersDaoImpl implements UsersDao {
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
     @PersistenceContext
     private EntityManager entityManager;
+
+    public UsersDaoImpl(BCryptPasswordEncoder bCryptPasswordEncoder) {
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+    }
+
 
     @Override
     public List<User> findAll() {
@@ -26,18 +35,26 @@ public class UsersDaoImpl implements UsersDao {
 
     @Override
     public void save(User user) {
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         entityManager.persist(user);
-
     }
 
     @Override
     public void addUser(User user) {
         user.setRoles(Collections.singleton(new Role("ROLE_USER")));
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         entityManager.persist(user);
     }
 
     @Override
     public void update(int id, User updatedUser) {
+//        User user = findByUsername(updatedUser.getUsername());
+//        user.setId(updatedUser.getId());
+//        user.setName(updatedUser.getName());
+//        user.setSurname(updatedUser.getSurname());
+//        user.setAge(updatedUser.getAge());
+//        user.setPassword(bCryptPasswordEncoder.encode(updatedUser.getPassword()));
+//        user.setRoles(updatedUser.getRoles());
         entityManager.merge(updatedUser);
     }
 

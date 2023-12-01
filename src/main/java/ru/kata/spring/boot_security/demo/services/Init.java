@@ -19,10 +19,10 @@ public class Init {
     @PostConstruct
     public void init() {
         // пароль = user
-        User user = new User("user", "$2a$12$tCKfMwLeOuJx/by1y1wR0edFEl/8LQFc2a9q1o0qvLeDFMTSS9wfi",
+        User user = new User("user", "user",
                 "Ivan", "Petrov", 24);
         // пароль = admin
-        User admin = new User("admin", "$2a$12$arIn8gFEPzcr4O.Cpa.u4OlqT.HRwzNaz5Cu3XyYjiquzR4x8SmjG",
+        User admin = new User("admin", "admin",
                 "Sergey", "Ivanov", 32);
         Role userRole = new Role("ROLE_USER");
         Role adminRole = new Role("ROLE_ADMIN");

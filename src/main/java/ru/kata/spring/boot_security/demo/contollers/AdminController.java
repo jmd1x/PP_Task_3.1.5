@@ -21,6 +21,11 @@ public class AdminController {
         model.addAttribute("users", usersService.findAll());
         return "admin_panel";
     }
+//    @GetMapping("/users")
+//    public String index(Model model) {
+//        model.addAttribute("users", usersService.findAll());
+//        return "test";
+//    }
 
     @GetMapping("/users/")
     public String show(@RequestParam(value = "id") int id, Model model) {
