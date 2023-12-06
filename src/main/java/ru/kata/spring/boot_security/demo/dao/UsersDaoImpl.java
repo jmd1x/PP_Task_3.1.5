@@ -40,7 +40,7 @@ public class UsersDaoImpl implements UsersDao {
 
     @Override
     public void addUser(User user) {
-        user.setRoles(Collections.singleton(new Role("ROLE_USER")));
+        user.setRoles(Collections.singleton(new Role()));
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         entityManager.persist(user);
     }

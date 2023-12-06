@@ -9,10 +9,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.kata.spring.boot_security.demo.dao.UsersDao;
+import ru.kata.spring.boot_security.demo.entities.Role;
 import ru.kata.spring.boot_security.demo.entities.User;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @Transactional(readOnly = true)
@@ -36,7 +36,15 @@ public class UsersServiceImpl implements UsersService, UserDetailsService {
     }
 
     @Transactional
-    public void addUser(User user) {
+    public void addUser(User user, String userRole, String adminRole) {
+        Set<Role> roles = new HashSet<>();
+        if (userRole != null && userRole.equals("USER")) {
+            roles.add(new Role("ROLE_USER"));
+        }
+        if (adminRole != null && adminRole.equals("ADMIN")) {
+            roles.add(new Role("ROLE_ADMIN"));
+        }
+        user.setRoles(roles);
         usersDao.addUser(user);
     }
 
@@ -66,5 +74,13 @@ public class UsersServiceImpl implements UsersService, UserDetailsService {
 
     public User findByUsername(String username) {
         return usersDao.findByUsername(username);
+    }
+
+    @Override
+    public Set<Role> getAllRoles() {
+        Set<Role> allRoles = new HashSet<>();
+        allRoles.add(new Role("ROLE_ADMIN"));
+        allRoles.add(new Role("ROLE_USER"));
+        return allRoles;
     }
 }

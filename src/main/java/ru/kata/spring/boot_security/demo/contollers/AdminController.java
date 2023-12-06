@@ -18,7 +18,7 @@ public class AdminController {
         this.usersService = usersService;
     }
 
-//    @GetMapping("/users")
+    //    @GetMapping("/users")
 //    public String index(Model model) {
 //        model.addAttribute("users", usersService.findAll());
 //        return "admin_panel";
@@ -38,12 +38,15 @@ public class AdminController {
 
     @GetMapping("/new")
     public String newUser(@ModelAttribute User user) {
+//        model.addAttribute("user", new User());
+//        model.addAttribute("roles", usersService.getAllRoles());
         return "redirect:/admin";
     }
 
     @PostMapping()
-    public String create(@ModelAttribute User user) {
-        usersService.addUser(user);
+    public String create(@ModelAttribute User user, @RequestParam(required = false) String roleAdmin,
+                         @RequestParam(required = false) String roleUser) {
+        usersService.addUser(user, roleAdmin, roleUser);
         return "redirect:/admin";
     }
 
