@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.*;
 import ru.kata.spring.boot_security.demo.entities.User;
 import ru.kata.spring.boot_security.demo.services.UsersService;
 
+import java.security.Principal;
+
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
@@ -16,50 +18,51 @@ public class AdminController {
         this.usersService = usersService;
     }
 
-    @GetMapping("/users")
-    public String index(Model model) {
-        model.addAttribute("users", usersService.findAll());
-        return "admin_panel";
-    }
 //    @GetMapping("/users")
 //    public String index(Model model) {
 //        model.addAttribute("users", usersService.findAll());
-//        return "test";
+//        return "admin_panel";
 //    }
+    @GetMapping()
+    public String index(Model model, Principal principal) {
+        model.addAttribute("users", usersService.findAll());
+        model.addAttribute("user", usersService.findByUsername(principal.getName()));
+        return "admin_bootstrap";
+    }
 
-    @GetMapping("/users/")
+    @GetMapping("/")
     public String show(@RequestParam(value = "id") int id, Model model) {
         model.addAttribute("user", usersService.show(id));
-        return "show";
+        return "redirect:/admin";
     }
 
-    @GetMapping("/users/new")
+    @GetMapping("/new")
     public String newUser(@ModelAttribute User user) {
-        return "new";
+        return "redirect:/admin";
     }
 
-    @PostMapping("/users")
+    @PostMapping()
     public String create(@ModelAttribute User user) {
         usersService.addUser(user);
-        return "redirect:/admin/users";
+        return "redirect:/admin";
     }
 
-    @GetMapping("/users/edit/")
+    @GetMapping("/edit/")
     public String edit(Model model, @RequestParam("id") int id) {
         model.addAttribute("user", usersService.show(id));
-        return "edit";
+        return "redirect:/admin";
     }
 
-    @PatchMapping("/users")
+    @PatchMapping()
     public String update(@ModelAttribute User user, @RequestParam("id") int id) {
         usersService.update(id, user);
-        return "redirect:/admin/users";
+        return "redirect:/admin";
     }
 
-    @DeleteMapping("/users")
+    @DeleteMapping()
     public String delete(@RequestParam("id") int id) {
         usersService.delete(id);
-        return "redirect:/admin/users";
+        return "redirect:/admin";
     }
 
 }

@@ -21,6 +21,6 @@ public class UsersController {
     @GetMapping()
     public String infoForUser(Model model, Principal principal) {
         model.addAttribute("user", usersService.findByUsername(principal.getName()));
-        return "show_for_user";
+        return "user_bootstrap";
     }
 }
