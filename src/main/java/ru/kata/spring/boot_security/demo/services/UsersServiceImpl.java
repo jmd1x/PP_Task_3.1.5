@@ -36,15 +36,7 @@ public class UsersServiceImpl implements UsersService, UserDetailsService {
     }
 
     @Transactional
-    public void addUser(User user, String userRole, String adminRole) {
-        Set<Role> roles = new HashSet<>();
-        if (userRole != null && userRole.equals("USER")) {
-            roles.add(new Role("ROLE_USER"));
-        }
-        if (adminRole != null && adminRole.equals("ADMIN")) {
-            roles.add(new Role("ROLE_ADMIN"));
-        }
-        user.setRoles(roles);
+    public void addUser(User user) {
         usersDao.addUser(user);
     }
 

@@ -13,10 +13,11 @@
 <!--Шапка с именем пользователя и логаутом-->
 <header>
     <nav class="navbar navbar-dark bg-dark navbar-fixed-top">
-        <!--        class="container-fluid" - растягивает по всей ширине странице -->
+        <!--        class="container-fluid" - растягивает по всей ширине страницы -->
         <div class="container-fluid text-white">
             <!--            &lt;strong&gt; &lt;/strong&gt; - тоже самое, что и <strong></strong> (для выделения жирным)-->
-            <a th:utext="${'&lt;strong&gt;' + user.getUsername() + '&lt;/strong&gt;'  + ' with roles: ' + user.getRoles()}"
+            <a th:each="roles:${user.getRoles()}"
+               th:utext="${'&lt;strong&gt;' + user.getUsername() + '&lt;/strong&gt;'  + ' with roles: ' + roles.getRole().replace('ROLE_','')}+'  '"
                class="navbar-brand">Navbar</a>
             <!--            Ссылка на logout-->
             <a href="/logout" class="navbar-brand d-flex align-items-right">Logout</a>
@@ -104,7 +105,7 @@
                                                 type="button">Delete
                                         </button>
                                     </td>
-                                    <!-- Модальное окно -->
+                                    <!-- Модальное окно изменения юзера -->
                                     <div class="modal fade" id="editModal" tabindex="-1"
                                          aria-labelledby="editModalLabel" aria-hidden="true"
                                          th:id="${'editModal'+u.getId()}">
@@ -311,15 +312,15 @@
                                                        required
                                                        th:name="password" th:type="password"/>
                                             </div>
-                                            <div class="form-group">
-                                                <label>Role</label>
-                                                <br/>
-                                                <label>
-                                                    <input type="checkbox" name="roleAdmin" th:value="ROLE_ADMIN" th:text="Admin">
-                                                </label>
-                                                <label>
-                                                    <input type="checkbox" name="roleUser" th:value="ROLE_USER" th:text="User">
-                                                </label>
+                                            <div class="form-group text-center">
+                                                <label class="col-form-label font-weight-bold" for="create-roles"
+                                                ><b>Role</b></label>
+                                                <select class="role-select text-center" th:name="roles" th:type="text"
+                                                        id="create-roles" required>
+                                                    <option selected>Choose Role</option>
+                                                    <option th:value="ROLE_ADMIN">ADMIN</option>
+                                                    <option th:value="ROLE_USER">USER</option>
+                                                </select>
                                             </div>
                                             <button class="btn btn-success btn-lg" th:type="submit"
                                                     value="Add user">Add user
@@ -334,9 +335,10 @@
             </div>
         </div>
     </div>
+</div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
-            crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+        crossorigin="anonymous"></script>
 </body>
 </html>

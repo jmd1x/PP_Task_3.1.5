@@ -15,7 +15,7 @@ public interface UsersService extends UserDetailsService {
 
     public void save(User user);
 
-    public void addUser(User user, String userRole, String adminRole);
+    public void addUser(User user);
 
     public void update(int id, User updatedUser);
 
