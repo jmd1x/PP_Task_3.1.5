@@ -12,9 +12,7 @@ public interface UsersDao {
 
     public void save(User user);
 
-    public void addUser(User user);
-
-    public void update(int id, User updatedUser);
+    public void update(User updatedUser);
 
     public void delete(int id);
 

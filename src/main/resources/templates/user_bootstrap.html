@@ -14,12 +14,13 @@
     <nav class="navbar navbar-dark bg-dark navbar-fixed-top">
         <!--        class="container-fluid" - растягивает по всей ширине странице -->
         <div class="container-fluid text-white">
-            <!--            &lt;strong&gt; &lt;/strong&gt; - тоже самое, что и <strong></strong> (для выделения жирным)-->
-            <a th:each="roles:${user.getRoles()}"
-               th:utext="${'&lt;strong&gt;' + user.getUsername() + '&lt;/strong&gt;'  + ' with roles: '
-               + roles.getRole().replace('ROLE_','')}+'  '"
-               class="navbar-brand">Navbar</a>
-            <!--            Ссылка на logout-->
+            <div class="navbar-brand">
+                <span style="display: inline-block" th:text="${user.getUsername()}"><b>Username</b></span>
+                <div style="display: inline-block" class="navbar-text">with roles:</div>
+                <span style="display: inline-block"
+                      th:each="roles: ${user.getRoles()}"
+                      th:text="${roles.getRole().replace('ROLE_',' ')}">Role</span>
+            </div>
             <a href="/logout" class="navbar-brand d-flex align-items-right">Logout</a>
         </div>
     </nav>

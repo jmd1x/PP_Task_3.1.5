@@ -22,6 +22,8 @@ public class Init {
                 "Ivan", "Petrov", 24);
         User admin = new User("admin", "admin",
                 "Sergey", "Ivanov", 32);
+        User admin2 = new User("admin2", "admin2",
+                "Nikolay", "Smirnov", 32);
         Role userRole = new Role("ROLE_USER");
         Role adminRole = new Role("ROLE_ADMIN");
         user.setRoles(Collections.singleton(userRole));
